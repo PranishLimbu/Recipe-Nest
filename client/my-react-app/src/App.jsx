@@ -1,120 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import Home from './pages/Home'
+import SignIn from './pages/SignIn'
+import Chefs from './pages/Chefs'
+import Recipe from './pages/Recipe'
+import Blog from './pages/Blog'
+import About from './pages/About'
+import StaffDesk from './pages/StaffDesk'
+import SignUp from './pages/SignUp'
+import Admin from './pages/Admin'
+import ChefPage from './pages/chefPage'
+import RecipePage from './pages/RecipePage'
+import BlogPage from './pages/BlogPage'
+
+const queryClient = new QueryClient()
+
+const routes = [
+  { path: '/', element: <Home /> },
+  { path: '/signin', element: <SignIn /> },
+  { path: '/Chefs', element: <Chefs /> },
+  { path: '/chefs', element: <Chefs /> },
+  { path: '/Chefs/:id', element: <ChefPage /> },
+  { path: '/chefs/:id', element: <ChefPage /> },
+  { path: '/Recipe', element: <Recipe /> },
+  { path: '/recipe', element: <Recipe /> },
+  { path: '/Recipe/:id', element: <RecipePage /> },
+  { path: '/recipe/:id', element: <RecipePage /> },
+  { path: '/recipes/:id', element: <RecipePage /> },
+  { path: '/Blog', element: <Blog /> },
+  { path: '/blog', element: <Blog /> },
+  { path: '/Blog/:id', element: <BlogPage /> },
+  { path: '/blog/:id', element: <BlogPage /> },
+  { path: '/blogs/:id', element: <BlogPage /> },
+  { path: '/Staff', element: <StaffDesk /> },
+  { path: '/staff', element: <StaffDesk /> },
+  { path: '/About', element: <About /> },
+  { path: '/about', element: <About /> },
+  { path: '/SignUp', element: <SignUp /> },
+  { path: '/signup', element: <SignUp /> },
+  { path: '/Admin', element: <Admin /> },
+  { path: '/admin', element: <Admin /> },
+]
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Routes>
+          {routes.map((route) => (
+            <Route key={route.path} {...route} />
+          ))}
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
   )
 }
 
