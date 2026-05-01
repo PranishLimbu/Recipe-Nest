@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 
 const recipeSchema = new mongoose.Schema(
   {
+    recipeId: {
+      type: Number,
+      unique: true,
+      index: true,
+    },
     title: {
       type: String,
       required: true,
@@ -18,6 +23,18 @@ const recipeSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    image: {
+      url: {
+        type: String,
+        default: "",
+        trim: true,
+      },
+      publicId: {
+        type: String,
+        default: "",
+        trim: true,
+      },
+    },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User", // links to User model
@@ -26,5 +43,7 @@ const recipeSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+recipeSchema.index({ title: "text", description: "text", ingredients: "text" });
 
 module.exports = mongoose.model("Recipe", recipeSchema);

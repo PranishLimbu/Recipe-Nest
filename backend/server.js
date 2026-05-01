@@ -7,8 +7,10 @@ const userRoutes = require("./src/routes/user.routes");
 const recipeRoutes = require("./src/routes/recipe.routes");
 const blogRoutes = require("./src/routes/blog.routes");
 const authRoutes=require("./src/routes/auth.routes");
+const chefRoutes=require("./src/routes/chef.routes");
 
 const app = express();
+
 const PORT = process.env.PORT || 3000;
 
 // connect to MongoDB
@@ -26,6 +28,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/recipes", recipeRoutes);
 app.use("/api/blogs", blogRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/chefs", chefRoutes);
 
 // 404 handler
 app.use((req, res) => {
